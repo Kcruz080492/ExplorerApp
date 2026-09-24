@@ -35,11 +35,12 @@ export async function fetchCountries(): Promise<Country[]> {
     //construye la url para la pagin que corresponde
     const url: URL = new URL(API_URL);
 
-    url.searchParams.set(
-      "response_fields",
-      "names.common,codes.alpha_2,flag.url_svg,"+
-      "flag.description,population,region,capitals",
-    );
+url.searchParams.set(
+  "response_fields",
+  "names.common,codes.alpha_2,flag.url_svg," +
+    "flag.description,population,region,capitals",
+);
+
     url.searchParams.set("limit", String(PAGE_SIZE));
     url.searchParams.set("offset", String(offset));
     url.searchParams.set("api-key", API_KEY);
@@ -83,11 +84,12 @@ export async function fetchCountryByCode(
     `${API_URL}/codes.alpha_2/${encodeURIComponent(code)}`,
   );
 
-  url.searchParams.set(
-    "response_fields",
-    "names.common,codes.alpha_2,flag.url_svg," +
-      "flag.description,population,region,capitals,borders",
-  );
+ url.searchParams.set(
+  "response_fields",
+  "names.common,names.native,codes.alpha_2," +
+    "flag.url_svg,flag.description,population,region," +
+    "subregion,capitals,tlds,currencies,languages,borders",
+);
 
   url.searchParams.set("api-key", API_KEY);
 
