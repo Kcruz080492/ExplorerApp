@@ -22,6 +22,9 @@ import { filterCountries } from "./utils/filter";
 // de carga, ausencia de resultados y error.
 import { renderEmpty, renderError, renderLoading } from "./render/states";
 
+import { fetchCountryByCode } from "./api/countries";
+
+import { renderDetail } from "./render/detail";
 
 
 // ======================================================
@@ -190,6 +193,9 @@ const regionFilter: HTMLSelectElement | null =
     "#region-filter",
   );
 
+const homeView: HTMLElement | null = document.querySelector("#home-view");
+const detailView: HTMLElement | null = document.querySelector("#detail-view");
+
 // Cantidad de tarjetas mostradas cuando no hay filtros.
 const INITIAL_VISIBLE_COUNTRIES: number = 8;
 
@@ -317,3 +323,30 @@ async function loadCountries(): Promise<void> {
   );
 
   void loadCountries();
+
+  async function router(): Promise<void> {
+  if (!homeView || !detailView) return;
+  const hash: string = window.location.hash;
+  const match: RegExpMatchArray | null =
+    hash.match(/^#\/country\/([A-Za-z]{2})$/);
+  if (!match) {
+    homeView.hidden = false;
+    detailView.hidden = true;
+    return;
+  }
+  const code: string = match[1] ?? "";
+  homeView.hidden = true;
+  detailView.hidden = false;
+  detailView.innerHTML = "<p>Cargando detalle del país…</p>";
+  try {
+    const country = await fetchCountryByCode(code);
+    if (window.location.hash !== hash) return;
+    detailView.innerHTML = renderDetail(country);
+  } catch {
+    if (window.location.hash !== hash) return;
+    detailView.innerHTML =
+      '<p>No fue posible cargar el país.</p><a href="#/">Volver a países</a>';
+  }
+}
+window.addEventListener("hashchange", (): void => { void router(); });
+void router(); // También atiende una URL de detalle abierta directamente.

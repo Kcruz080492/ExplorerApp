@@ -4,6 +4,15 @@ import type {
   CountriesResponse,
 } from "../types/country";
 
+import type { 
+  CountryDetail 
+} from "../types/country-detail";
+
+interface DetailResponse {
+  data: { objects: CountryDetail[] };
+}
+
+
 const API_KEY: string =
   import.meta.env.VITE_REST_COUNTRIES_API_KEY;
 
@@ -66,4 +75,27 @@ const API_URL: string =
   }
 
   return allCountries;
+}
+
+export async function fetchCountryByCode(
+  code: string,
+): Promise<CountryDetail> {
+  const key: string | undefined = import.meta.env.VITE_REST_COUNTRIES_API_KEY;
+  if (!key) throw new Error("Falta la clave de la API.");
+  const fields: string =
+    "names.common,codes.alpha_2,flag.url_svg,flag.description," +
+    "population,region,capitals,borders";
+  const url: string =
+    `https://api.restcountries.com/countries/v5/` +
+    `codes.alpha_2/${encodeURIComponent(code)}?response_fields=${fields}`;
+  const response: Response = await fetch(url, {
+    headers: { Authorization: `Bearer ${key}` },
+  });
+  if (!response.ok) {
+    throw new Error(`No se pudo cargar el país (${response.status}).`);
+  }
+  const payload: DetailResponse = await response.json() as DetailResponse;
+  const country: CountryDetail | undefined = payload.data.objects[0];
+  if (!country) throw new Error("No se encontró el país solicitado.");
+  return country;
 }

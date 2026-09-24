@@ -1,6 +1,7 @@
 <!-- index -->
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -12,17 +13,11 @@
   <header class="bg-blue-500 text-neutral-0">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
       <div class="flex min-h-16 items-center justify-between md:min-h-20">
-      <a
-        href="#inicio"
-        class="whitespace-nowrap text-lg font-bold text-neutral-0 sm:text-xl lg:text-2xl"
-      >
-        Where in the world?
-      </a>
+        <a href="#inicio" class="whitespace-nowrap text-lg font-bold text-neutral-0 sm:text-xl lg:text-2xl">
+          Where in the world?
+        </a>
 
-      <button
-        id="menu-toggle"
-        type="button"
-        class="flex size-11 
+        <button id="menu-toggle" type="button" class="flex size-11 
         items-center 
         justify-center 
         rounded-md 
@@ -31,98 +26,59 @@
                hover:bg-blue-600 active:scale-95
                focus-visible:outline-2
                focus-visible:outline-offset-2
-               focus-visible:outline-orange-500"
-               
-        aria-controls="main-menu"
-        aria-expanded="false"
-        aria-label="Abrir menú de navegación"
-      >
-        <svg
-          id="menu-open-icon"
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          class="size-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
+               focus-visible:outline-orange-500" aria-controls="main-menu" aria-expanded="false"
+          aria-label="Abrir menú de navegación">
+          <svg id="menu-open-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
 
-        <svg
-          id="menu-close-icon"
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          class="hidden size-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-width="2"
-            d="M6 6l12 12M18 6 6 18"
-          />
-        </svg>
-      </button>
+          <svg id="menu-close-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            class="hidden size-6">
+            <path stroke-linecap="round" stroke-width="2" d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
       </div>
 
-    <nav
-      id="main-menu"
-      class="hidden border-t border-neutral-0/20 pb-4 md:block md:border-0 md:pb-0"
-      aria-label="Navegación principal"
-    >
-      <ul
-        class="flex flex-col gap-1 text-sm
-               md:flex-row md:items-center md:gap-5 lg:gap-6"
-      >
-        <li>
-          <a
-            href="#inicio"
-            class="block border-l-4 border-orange-500 px-3 py-3 font-medium
-                   md:border-l-0 md:border-b-2 md:px-0 md:py-2"
-            aria-current="page"
-          >
-            Inicio
-          </a>
-        </li>
+      <nav id="main-menu" class="hidden border-t border-neutral-0/20 pb-4 md:block md:border-0 md:pb-0"
+        aria-label="Navegación principal">
+        <ul class="flex flex-col gap-1 text-sm
+               md:flex-row md:items-center md:gap-5 lg:gap-6">
+          <li>
+            <a href="#inicio" class="block border-l-4 border-orange-500 px-3 py-3 font-medium
+                   md:border-l-0 md:border-b-2 md:px-0 md:py-2" aria-current="page">
+              Inicio
+            </a>
+          </li>
 
-        <li>
-          <a
-            href="#paises"
-            class="block rounded-md px-3 py-3
+          <li>
+            <a href="#paises" class="block rounded-md px-3 py-3
                    transition-colors hover:bg-blue-600
                    focus-visible:outline-2
                    focus-visible:outline-orange-500
                    md:px-0 md:py-2 md:hover:bg-transparent
-                   md:hover:text-orange-500"
-          >
-            Explorar países
-          </a>
-        </li>
+                   md:hover:text-orange-500">
+              Explorar países
+            </a>
+          </li>
 
-        <li>
-          <a
-            href="#acerca-de"
-            class="block rounded-md px-3 py-3
+          <li>
+            <a href="#acerca-de" class="block rounded-md px-3 py-3
                    transition-colors hover:bg-blue-600
                    focus-visible:outline-2
                    focus-visible:outline-orange-500
                    md:px-0 md:py-2 md:hover:bg-transparent
-                   md:hover:text-orange-500"
-          >
-            Acerca de
-          </a>
-        </li>
-      </ul>
-    </nav>
+                   md:hover:text-orange-500">
+              Acerca de
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <main id="inicio" class="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-    <section aria-labelledby="explore-title">
+    <section id="home-view" aria-labelledby="explore-title">
       <div class="mb-8 md:mb-10">
         <h1 id="explore-title" class="max-w-2xl text-3xl font-semibold leading-tight
            text-neutral-900 md:text-4xl">
@@ -132,7 +88,6 @@
           Busca un país o filtra por región para consultar su información.
         </p>
       </div>
-
 
       <div class="mb-12 flex flex-col gap-3 md:mb-16 md:flex-row md:items-center md:gap-4">
         <div class="relative flex-1">
@@ -175,16 +130,14 @@
           Países destacados
         </h2>
 
-        <section id="countries-container"
-          class="grid grid-cols-1 gap-6 
+        <section id="countries-container" class="grid grid-cols-1 gap-6 
           sm:grid-cols-2 
           lg:grid-cols-3 lg:gap-8 
-          xl:grid-cols-4"
-          aria-label="Listado de países">
-
-
+          xl:grid-cols-4" aria-label="Listado de países">
         </section>
       </div>
+      <!-- Esta sección nueva va después de cerrar home-view -->
+      <section id="detail-view" hidden aria-live="polite"></section>
     </section>
   </main>
 
@@ -200,9 +153,15 @@
 
       <nav aria-label="Enlaces del pie de página">
         <ul class="flex flex-wrap gap-6 text-xs font-semibold">
-          <li><a href="#" class="rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500">Documentación</a></li>
-          <li><a href="#" class="rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500">Código fuente</a></li>
-          <li><a href="#" class="rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500">Privacidad</a></li>
+          <li><a href="#"
+              class="rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500">Documentación</a>
+          </li>
+          <li><a href="#"
+              class="rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500">Código
+              fuente</a></li>
+          <li><a href="#"
+              class="rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange-500">Privacidad</a>
+          </li>
         </ul>
       </nav>
     </div>
