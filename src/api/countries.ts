@@ -1,62 +1,54 @@
 // countries.ts — Comunicación con REST Countries API
-import type {
-  Country,
-  CountriesResponse,
-} from "../types/country";
+import type { Country, CountriesResponse } from "../types/country";
 
-import type { 
-  CountryDetail 
-} from "../types/country-detail";
+import type { CountryDetail } from "../types/country-detail";
 
-interface DetailResponse {
-  data: { objects: CountryDetail[] };
-}
+interface DetailResponse { data: { objects: CountryDetail[] }; }
 
 
 const API_KEY: string =
   import.meta.env.VITE_REST_COUNTRIES_API_KEY;
 
-  if (!API_KEY) {
-  throw new Error(
-    "No se encontró la API key de REST Countries."
-  );
-}
+const API_URL: string =
+  "https://api.restcountries.com/countries/v5";
 
 // Máximo permitido por petición en el plan gratuito.
 const PAGE_SIZE: number = 100;
 
-const API_URL: string =
-  "https://api.restcountries.com/countries/v5" +
-  "?response_fields=names.common,codes.alpha_2,flag.url_svg," +
-  "flag.description,population,region,capitals";
-
-  /**
- * Obtiene todos los países realizando varias peticiones
- * mediante limit y offset.
+/**
+ * Obtiene todos los países mediante varias peticiones.
  */
+export async function fetchCountries(): Promise<Country[]> {
+  if (!API_KEY) {
+    throw new Error(
+      "No se encontró la API key de REST Countries.",
+    );
+  }
 
-  export async function fetchCountries(): Promise<Country[]> {
- 
   const allCountries: Country[] = [];
 
   let offset: number = 0;
   let hasMoreCountries: boolean = true;
 
   while (hasMoreCountries) {
-    const response: Response = await fetch(
-      `${API_URL}&limit=${PAGE_SIZE}&offset=${offset}`,
-      {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-        },
-      },
-    );
+    //construye la url para la pagin que corresponde
+    const url: URL = new URL(API_URL);
 
-  if (!response.ok) {
-    throw new Error(
-       `Error HTTP: ${response.status}`,
+    url.searchParams.set(
+      "response_fields",
+      "names.common,codes.alpha_2,flag.url_svg,"+
+      "flag.description,population,region,capitals",
     );
-  }
+    url.searchParams.set("limit", String(PAGE_SIZE));
+    url.searchParams.set("offset", String(offset));
+    url.searchParams.set("api-key", API_KEY);
+
+    const response: Response = await fetch(url);
+    if (!response.ok){
+      throw new Error(
+        `Error HTTP al cargar paises: ${response.status}`
+      )
+    }
 
    const result: CountriesResponse =
       await response.json() as CountriesResponse;
@@ -80,22 +72,33 @@ const API_URL: string =
 export async function fetchCountryByCode(
   code: string,
 ): Promise<CountryDetail> {
-  const key: string | undefined = import.meta.env.VITE_REST_COUNTRIES_API_KEY;
-  if (!key) throw new Error("Falta la clave de la API.");
-  const fields: string =
-    "names.common,codes.alpha_2,flag.url_svg,flag.description," +
-    "population,region,capitals,borders";
-  const url: string =
-    `https://api.restcountries.com/countries/v5/` +
-    `codes.alpha_2/${encodeURIComponent(code)}?response_fields=${fields}`;
-  const response: Response = await fetch(url, {
-    headers: { Authorization: `Bearer ${key}` },
-  });
+  if (!API_KEY) throw new Error("No se encontro la API key de REST COUNTRIES.",
+ );
+
+  const url: URL = new URL(
+    `${API_URL}/codes.alpha_2/${encodeURIComponent(code)}`,
+  );
+
+  url.searchParams.set(
+    "response_fields",
+    "names.common,codes.alpha_2,flag.url_svg," +
+      "flag.description,population,region,capitals,borders",
+  );
+
+  url.searchParams.set("api-key", API_KEY);
+
+  const response: Response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`No se pudo cargar el país (${response.status}).`);
+    throw new Error(
+      `Error HTTP al cargar el detalle: ${response.status}`,
+    );
   }
   const payload: DetailResponse = await response.json() as DetailResponse;
+
   const country: CountryDetail | undefined = payload.data.objects[0];
-  if (!country) throw new Error("No se encontró el país solicitado.");
+
+  if  (!country){
+     throw new Error("No se encontró el país solicitado.");
+ }
   return country;
 }

@@ -324,7 +324,7 @@ async function loadCountries(): Promise<void> {
 
   void loadCountries();
 
-  async function router(): Promise<void> {
+async function router(): Promise<void> {
   if (!homeView || !detailView) return;
   const hash: string = window.location.hash;
   const match: RegExpMatchArray | null =
