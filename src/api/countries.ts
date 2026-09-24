@@ -3,6 +3,7 @@ import type { Country, CountriesResponse } from "../types/country";
 
 import type { CountryDetail } from "../types/country-detail";
 
+// Describe la parte de la respuesta que contiene el país consultado.
 interface DetailResponse { data: { objects: CountryDetail[] }; }
 
 
@@ -69,6 +70,9 @@ export async function fetchCountries(): Promise<Country[]> {
   return allCountries;
 }
 
+/**
+ * Obtiene los datos de un país a partir de su código de dos letras.
+ */
 export async function fetchCountryByCode(
   code: string,
 ): Promise<CountryDetail> {
@@ -102,3 +106,7 @@ export async function fetchCountryByCode(
  }
   return country;
 }
+
+
+
+

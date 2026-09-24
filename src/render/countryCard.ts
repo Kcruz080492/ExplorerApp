@@ -36,9 +36,9 @@ export function renderCountryCard(
       
         <h2 class="text-xl font-bold text-neutral-900">
            <a
-    href="#/country/${encodeURIComponent(country.codes.alpha_2)}"
-    class="hover:text-blue-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
-  >
+            href="#/country/${encodeURIComponent(country.codes.alpha_2)}"
+            class="hover:text-blue-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+            >
           ${country.names.common}
           </a>
         </h2>
@@ -77,9 +77,11 @@ export function renderCountryCard(
 
         <a
           href="#/country/${encodeURIComponent(country.codes.alpha_2)}"
-          class="mt-6 flex min-h-11 w-full items-center justify-center rounded-full bg-orange-500 px-5 py-2 text-lg font-medium text-neutral-900 transition-all duration-200 hover:bg-orange-600 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 sm:w-32"
-          aria-label="Ver más información de ${country.names.common}"
-        >
+          class="mt-6 flex min-h-11 w-full items-center justify-center rounded-full 
+          bg-orange-500 px-5 py-2 text-lg font-medium text-neutral-900 transition-all duration-200 
+          hover:bg-orange-600 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 
+          focus-visible:outline-blue-500 sm:w-32"
+          aria-label="Ver más información de ${country.names.common}">
           Ver más
         </a>
       </div>

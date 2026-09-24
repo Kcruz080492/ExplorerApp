@@ -193,8 +193,11 @@ const regionFilter: HTMLSelectElement | null =
     "#region-filter",
   );
 
-const homeView: HTMLElement | null = document.querySelector("#home-view");
-const detailView: HTMLElement | null = document.querySelector("#detail-view");
+const homeView: HTMLElement | null = 
+  document.querySelector("#home-view");
+
+const detailView: HTMLElement | null = 
+ document.querySelector("#detail-view");
 
 // Cantidad de tarjetas mostradas cuando no hay filtros.
 const INITIAL_VISIBLE_COUNTRIES: number = 8;
