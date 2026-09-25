@@ -70,7 +70,6 @@ url.searchParams.set(
 
   return allCountries;
 }
-
 /**
  * Obtiene los datos de un país a partir de su código de dos letras.
  */

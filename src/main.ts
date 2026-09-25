@@ -328,28 +328,43 @@ async function loadCountries(): Promise<void> {
   void loadCountries();
 
 async function router(): Promise<void> {
-  if (!homeView || !detailView) return;
-  const hash: string = window.location.hash;
-  const match: RegExpMatchArray | null =
-    hash.match(/^#\/country\/([A-Za-z]{2})$/);
+
+  if (!homeView || !detailView) {
+    console.error("Faltan #home-view o #detail-view.");
+    return;
+  }
+
+  // La ruta de detalle requiere un código de dos letras.
+  const hash = window.location.hash;
+  const match = hash.match(/^#\/country\/([A-Za-z]{2})$/);
+
   if (!match) {
     homeView.hidden = false;
     detailView.hidden = true;
     return;
   }
-  const code: string = match[1] ?? "";
+
+  const code = match[1] ?? "";
   homeView.hidden = true;
   detailView.hidden = false;
   detailView.innerHTML = "<p>Cargando detalle del país…</p>";
+
   try {
     const country = await fetchCountryByCode(code);
+    // Ignora una respuesta anterior si cambió la ruta entretanto.
     if (window.location.hash !== hash) return;
     detailView.innerHTML = renderDetail(country);
-  } catch {
+  } catch (error: unknown) {
     if (window.location.hash !== hash) return;
+    console.error("Error al cargar el detalle:", error);
     detailView.innerHTML =
-      '<p>No fue posible cargar el país.</p><a href="#/">Volver a países</a>';
+      '<p>No fue posible cargar el país.</p>' +
+      '<a href="#/">Volver a países</a>';
   }
 }
-window.addEventListener("hashchange", (): void => { void router(); });
-void router(); // También atiende una URL de detalle abierta directamente.
+
+window.addEventListener("hashchange", () => {
+  void router();
+});
+
+void router(); // Atiende también una URL abierta directamente.
