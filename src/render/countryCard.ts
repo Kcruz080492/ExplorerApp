@@ -26,18 +26,20 @@ export function renderCountryCard(
 
   return `
     <article
-      class="group flex w-full flex-col overflow-hidden rounded-lg bg-neutral-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-within:ring-2 focus-within:ring-orange-500 focus-within:ring-offset-2"
+      class="@container group flex w-full flex-col overflow-hidden rounded-lg bg-neutral-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-within:ring-2 focus-within:ring-orange-500 focus-within:ring-offset-2"
     >
+      <div class="flex flex-col @min-[20rem]:flex-row">
       <img
-        class="aspect-3/2 w-full shrink-0 object-cover"
+        class="aspect-3/2 w-full shrink-0 object-cover 
+        @min-[20rem]:aspect-auto @min-[20rem]:w-2/5"
         src="${country.flag.url_svg || "/placeholder.png"}"
         alt="${flagDescription}"
         loading="lazy"
         onerror="this.onerror=null; this.src='/placeholder.png';"
       >
 
-      <div class="flex flex-1 flex-col p-5">
-      <h2 class="text-xl font-bold text-neutral-900">
+      <div class="flex flex-1 flex-col p-5 @min-[20rem]:w-3/5">
+      <h2 class="text-(length:--font-country-name) font-bold text-neutral-900">
         ${code
       ? `<a
         href="${detailUrl}"
@@ -98,6 +100,7 @@ export function renderCountryCard(
       Detalle no disponible para este país.
     </p>`}
 
+      </div>
       </div>
     </article>
   `;

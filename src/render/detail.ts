@@ -82,7 +82,7 @@ export function renderDetail(country: CountryDetail): string {
       <div>${flag}</div>
 
       <div>
-        <h1 class="text-3xl font-bold text-neutral-900 md:text-4xl">
+        <h1 class="text-(length:--font-page-title) font-bold text-neutral-900 md:text-4xl">
           ${escapeHtml(country.names.common)}
         </h1>
 
