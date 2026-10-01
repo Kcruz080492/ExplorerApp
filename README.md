@@ -2,6 +2,8 @@
 
 Aplicación web para explorar países, buscar por nombre, filtrar por región y consultar información de cada país. Desarrollada como proyecto académico de la asignatura Diseño Web Adaptable de la Universidad de Oriente (UNIVO).
 
+Esta demo docente utiliza una copia estática de los datos de REST Countries para reducir el consumo de la API. Los datos no se actualizan automáticamente.
+
 ## Tecnologías
 
 - **Vite:** entorno de desarrollo y compilación.
