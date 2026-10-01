@@ -26,9 +26,14 @@ export function renderCountryCard(
 
   return `
     <article
-      class="@container group flex w-full flex-col overflow-hidden rounded-lg bg-neutral-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-within:ring-2 focus-within:ring-orange-500 focus-within:ring-offset-2"
-    >
+      class="@container group flex w-full flex-col 
+      overflow-hidden rounded-lg bg-neutral-0 shadow-md 
+      transition-all duration-300 hover:-translate-y-1 
+      hover:shadow-xl focus-within:ring-2 focus-within:ring-orange-500 
+      focus-within:ring-offset-2">
+
       <div class="flex flex-col @min-[20rem]:flex-row">
+
       <img
         class="aspect-3/2 w-full shrink-0 object-cover 
         @min-[20rem]:aspect-auto @min-[20rem]:w-2/5"
@@ -38,7 +43,10 @@ export function renderCountryCard(
         onerror="this.onerror=null; this.src='/placeholder.png';"
       >
 
-      <div class="flex flex-1 flex-col p-5 @min-[20rem]:w-3/5">
+      <div class="flex min-w-0 flex-1 flex-col p-5 @min-[20rem]:w-3/5">
+      <!-- Aquí permanecen tu h2, dl y enlace Ver más -->
+
+
       <h2 class="text-(length:--font-country-name) font-bold text-neutral-900">
         ${code
       ? `<a
